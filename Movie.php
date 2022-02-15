@@ -13,13 +13,13 @@
 class Movie {
   // variabili d’istanza
   // variabili set in costruttore
-  public $title;
-  public $original_language;
-  public $release_date;
+  protected $title;
+  protected $original_language;
+  protected $release_date;
   // variabili da includere in funzione set
-  public $overview;
-  public $popularity;
-  public $cast;
+  protected $overview;
+  protected $popularity;
+  protected $cast;
 
   // Costruttore
   
@@ -132,50 +132,61 @@ $kulhe->setCast($kulhe__setterData['Cast']);
   <div class="container">
     <!-- stampa dati film fight club-->
     <div class="film">
-      <ul>
-        <?php
-        foreach ($fightClub as $attr => $val) {
-          // stampa in caso di dato con array, bigono di altro foreach per stampare tutti gli elementi
-          if(gettype($val) === 'array') { // si potrebbe anche fare se attr === Cast ... ma se aggiungiamo altri array potrebbe tornare piu utile cosi
-            echo '<li><h3 class="bold-item">'. str_replace('_',' ',$attr) .'</h3><li>';
-            echo '<ul>';
-            foreach ($val as $key => $item) {
-              echo '<li><h4 class="inline-h">'.str_replace('-',' ',$key).'</h4>' . $item . '</li>';
-            }
-            echo '</ul>';
-          } else if($val === null) {
-            echo '<li>'.str_replace('_',' ',$attr) .': Valore non presente.</li>';
-          }
-          else { // caso in cui dato sia stringa o comunque un valore visibile senza altre complicazioni
-            echo '<li><h3>'. str_replace('_',' ',$attr) .'</h3>'. $val. '</li>';
-          }
+      <h2><?= $fightClub->getTitle() ?></h2>
+      <div class="item__original-language">
+        <b>Lingua originale: </b>
+        <span>
+          <?=
+          (($fightClub->getOriginalLanguage() === 'en') ? 'inglese' : ($fightClub->getOriginalLanguage() === 'de')) ? 'Tedesco' : $fightClub->getOriginalLanguage();
+          ?>
+        </span>
+      </div>
+      <div class="item__release-date">
+        <b>Data di uscita: </b><span><?= $fightClub->getReleaseDate() ?></span>
+      </div>
+      <div class="item__popularity">
+        <b>Voto: </b><span><?= $fightClub->getPopularity() ?></span>
+      </div>
+      <div class="item__cast">
+        <h3>Cast</h3>
+        <ul>
+          <?php
+
+        foreach ($fightClub->getCast() as $role => $actor) {
+          echo '<li><b>' . str_replace('-', ' ',$role) . ': </b><span>' . $actor .'</span></li>';
         }
         ?>
-      </ul>
+        </ul>
+      </div>
     </div>
-    <!-- stampa dati film khule -->
-    <hr>
+        <!-- stampa dati film fight club-->
     <div class="film">
-      <ul>
-        <?php
-        foreach ($kulhe as $attr => $val) {
-          // stampa in caso di dato con array, bigono di altro foreach per stampare tutti gli elementi
-          if(gettype($val) === 'array') { // si potrebbe anche fare se attr === Cast ... ma se aggiungiamo altri array potrebbe tornare piu utile cosi
-            echo '<li><h3 class="bold-item">'. str_replace('_',' ',$attr) .'</h3><li>';
-            echo '<ul>';
-            foreach ($val as $key => $item) {
-              echo '<li><h4 class="inline-h">'.str_replace('-',' ',$key).'</h4>' . $item . '</li>';
-            }
-            echo '</ul>';
-          } else if($val === null) {
-            echo '<li>'.str_replace('_',' ',$attr) .'mancante </li>';
-          }
-          else { // caso in cui dato sia stringa o comunque un valore visibile
-            echo '<li><h3>'. str_replace('_',' ',$attr). '</h3>'. $val. '</li>';
-          }
+      <h2><?= $kulhe->getTitle() ?></h2>
+      <div class="item__original-language">
+        <b>Lingua originale: </b>
+        <span>
+          <?=
+          (($kulhe->getOriginalLanguage() === 'en') ? 'inglese' : ($kulhe->getOriginalLanguage() === 'de')) ? 'Tedesco' : $kulhe->getOriginalLanguage();
+          ?>
+        </span>
+      </div>
+      <div class="item__release-date">
+        <b>Data di uscita: </b><span><?= $kulhe->getReleaseDate() ?></span>
+      </div>
+      <div class="item__popularity">
+        <b>Voto: </b><span><?= $kulhe->getPopularity() ?></span>
+      </div>
+      <div class="item__cast">
+        <h3>Cast</h3>
+        <ul>
+          <?php
+
+        foreach ($kulhe->getCast() as $role => $actor) {
+          echo '<li><b>' . str_replace('-', ' ',$role) . ': </b><span>' . $actor .'</span></li>';
         }
         ?>
-      </ul>
+        </ul>
+      </div>
     </div>
   </div>
 </body>

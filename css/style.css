@@ -16,9 +16,12 @@ h1 {
   text-align: center;
   color: blue;
 }
-h2,h3 {
+h2 {
   text-transform: uppercase;
-  color: darksalmon;
+  color: red;
+}
+h3 {
+  color: orange;
 }
 .container {
   width: 80%;
