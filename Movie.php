@@ -68,6 +68,21 @@ class Movie {
   public function addCast(string $role,string $actor) {
     $this->cast[$role] = $actor;
   }
+  public function getFullOriginalLanguage() {
+    switch(strtolower($this->getOriginalLanguage())) {
+      case 'en': 
+        return 'Inglese';
+        break;
+      case 'de': 
+        return 'Tedesco';
+        break;
+      case 'it': 
+        return 'Italiano';
+        break;
+      default: 
+        return $this->getOriginalLanguage(); // se la lingua non é presente nel controllo restituisce la lingua abbreviata
+    }
+  }
 }
 
 $fightClub__setterData = [
@@ -142,9 +157,7 @@ $kulhe->setCast($kulhe__setterData['Cast']);
       <div class="item__original-language">
         <b>Lingua originale: </b>
         <span>
-          <?=
-          (($fightClub->getOriginalLanguage() === 'en') ? 'inglese' : ($fightClub->getOriginalLanguage() === 'de')) ? 'Tedesco' : $fightClub->getOriginalLanguage();
-          ?>
+          <?= $fightClub->getFullOriginalLanguage() ?>
         </span>
       </div>
       <div class="item__release-date">
@@ -171,9 +184,7 @@ $kulhe->setCast($kulhe__setterData['Cast']);
       <div class="item__original-language">
         <b>Lingua originale: </b>
         <span>
-          <?=
-          (($kulhe->getOriginalLanguage() === 'en') ? 'inglese' : ($kulhe->getOriginalLanguage() === 'de')) ? 'Tedesco' : $kulhe->getOriginalLanguage();
-          ?>
+        <?= $kulhe->getFullOriginalLanguage()?>
         </span>
       </div>
       <div class="item__release-date">
