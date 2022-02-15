@@ -62,6 +62,12 @@ class Movie {
   public function getCast() {
     return $this->cast;
   }
+  /**
+   * 
+  */
+  public function addCast(string $role,string $actor) {
+    $this->cast[$role] = $actor;
+  }
 }
 
 $fightClub__setterData = [
@@ -94,7 +100,7 @@ $fightClub = new Movie('Fight Club','en','1999-10-15');
 $fightClub->setOverview($fightClub__setterData['Overview']);
 $fightClub->setPopularity($fightClub__setterData['Popularity']);
 $fightClub->setCast($fightClub__setterData['Cast']);
-
+$fightClub->addCast($role = 'Manager',$actor = 'Claudio Andriani');
 $kulhe__setterData = [
   'Overview' => 'Kuhle Wampe takes place in early-1930s Berlin. The film begins with a montage of newspaper headlines describing steadily-rising unemployment figures. This is followed by scenes of a young man looking for work in the city and the family discussing the unpaid back rent. The young man, brother of the protagonist Anni, removes his wristwatch and throws himself from a window out of despair. Shortly thereafter his family is evicted from their apartment. Now homeless, the family moves into a garden colony of sorts with the name "Kuhle Wampe".',
   'Popularity' => 1.587,
