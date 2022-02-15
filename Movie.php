@@ -14,8 +14,8 @@ class Movie {
   // variabili d’istanza
   // variabili set in costruttore
   public $title;
-  public $originalLanguage;
-  public $releaseDate;
+  public $original_language;
+  public $release_date;
   // variabili da includere in funzione set
   public $overview;
   public $popularity;
@@ -23,11 +23,11 @@ class Movie {
 
   // Costruttore
   
-  function __construct(string $_title,string $_originalLanguage,string $_releaseDate)
+  function __construct(string $_title,string $_original_anguage,string $_release_date)
   {
     $this->title = $_title;
-    $this->originalLanguage = $_originalLanguage;
-    $this->releaseDate = $_releaseDate;
+    $this->original_language = $_original_anguage;
+    $this->release_date = $_release_date;
   }
   // Metodi
   // Setter
@@ -48,10 +48,10 @@ class Movie {
     return $this->title;
   }
   public function getOriginalLanguage() {
-    return $this->originalLanguage;
+    return $this->original_language;
   }
   public function getReleaseDate() {
-    return $this->releaseDate;
+    return $this->release_date;
   }
   public function getOverview() {
     return $this->overview;
@@ -70,21 +70,21 @@ $fightClub__setterData = [
   'Cast' => [
     'Narratore' => 'Edward Norton',
     'Tyler-Durden' => 'Brad Pitt',
-    'Helena-Bonham-Carter' => 'Marla Singer',
-    'Jared-Leto' => 'Faccia d\'Angelo',
-    'Meat-Loaf' => 'Robert "Bob" Paulson',
-    'Zach-Grenier' => 'Richard Chesler',
-    'David-Andrews' => 'Thomas',
-    'Rachel-Singer' => 'Chloe',
-    'Tim-De-Zarn' => 'ispettore Bird',
-    'Ezra-Buzzington' => 'ispettore Dent',
-    'David-Lee-Smith' => 'Walter',
-    'Eion-Bailey' => 'Ricky',
-    'Evan-Mirand' => 'Steph',
-    'Thom-Gossom-Jr.' => 'detective Stern',
-    'Peter-Iacangelo' => 'Lou',
-    'Joo-n-B-.-Kim' => 'Raymond K. Hessel',
-    'Michael-ShamusWiles' => 'Barista',
+    'Marla-Singer' => 'Helena Bonham Carter',
+    'Faccia-d\'Angelo' => 'Jared Leto',
+    'Robert-"Bob"-Paulson' => 'Meat Loaf',
+    'Richard-Chesler' => 'Zach Grenier',
+    'Thomas' => 'David Andrews',
+    'Chloe'  => 'Rachel Singer',
+    'ispettore-Bird'  => 'Tim De Zarn',
+    'ispettore-Dent'  => 'Ezra Buzzington',
+    'Walter'  => 'David Lee Smith',
+    'Ricky'  => 'Eion Bailey',
+    'Steph'  => 'Evan Mirand',
+    'detective-Stern'  => 'Thom Gossom Jr.',
+    'Lou'  => 'Peter Iacangelo',
+    'Raymond-K.-Hessel'  => 'Joo n B . Kim',
+    'Barista'  => 'Michael ShamusWiles',
   ],
 ];
 // Istanze
@@ -94,7 +94,22 @@ $fightClub = new Movie('Fight Club','en','1999-10-15');
 $fightClub->setOverview($fightClub__setterData['Overview']);
 $fightClub->setPopularity($fightClub__setterData['Popularity']);
 $fightClub->setCast($fightClub__setterData['Cast']);
-// var_dump($fightClub);
+
+$kulhe__setterData = [
+  'Overview' => 'Kuhle Wampe takes place in early-1930s Berlin. The film begins with a montage of newspaper headlines describing steadily-rising unemployment figures. This is followed by scenes of a young man looking for work in the city and the family discussing the unpaid back rent. The young man, brother of the protagonist Anni, removes his wristwatch and throws himself from a window out of despair. Shortly thereafter his family is evicted from their apartment. Now homeless, the family moves into a garden colony of sorts with the name "Kuhle Wampe".',
+  'Popularity' => 1.587,
+  'Cast' => [
+    'Annie' => 'Hertha Thiele',
+    'Fritz' => 'Ernst Busch',
+    'Martha-Wolter' => 'Gerda',
+    'Adolf-Fischer' => 'Karl Genosse',
+    'Lilli-Schönborn' => 'Lili Schoenborn-Anspach'
+  ],
+];
+$kulhe = new Movie('Kuhle Wampe oder: Wem gehört die Welt?', "de", "1932-05-14");
+$kulhe->setOverview($kulhe__setterData['Overview']);
+$kulhe->setPopularity($kulhe__setterData['Popularity']);
+$kulhe->setCast($kulhe__setterData['Cast']);
 ?>
 
 
@@ -112,13 +127,38 @@ $fightClub->setCast($fightClub__setterData['Cast']);
   <header class="header">
     <h1>Movie</h1>
     <hr>
+    <hr>
   </header>
   <div class="container">
-    <!-- stampa film prima stanza -->
+    <!-- stampa dati film fight club-->
     <div class="film">
       <ul>
         <?php
         foreach ($fightClub as $attr => $val) {
+          // stampa in caso di dato con array, bigono di altro foreach per stampare tutti gli elementi
+          if(gettype($val) === 'array') { // si potrebbe anche fare se attr === Cast ... ma se aggiungiamo altri array potrebbe tornare piu utile cosi
+            echo '<li><h3 class="bold-item">'. $attr .'</h3><li>';
+            echo '<ul>';
+            foreach ($val as $key => $item) {
+              echo '<li><h4 class="inline-h">'.str_replace('-',' ',$key).'</h4>' . $item . '</li>';
+            }
+            echo '</ul>';
+          } else if($val === null) {
+            echo '<li>'.$attr .': Valore non presente.</li>';
+          }
+          else { // caso in cui dato sia stringa o comunque un valore visibile senza altre complicazioni
+            echo '<li><h3>'. $attr .'</h3>'. $val. '</li>';
+          }
+        }
+        ?>
+      </ul>
+    </div>
+    <!-- stampa dati film khule -->
+    <hr>
+    <div class="film">
+      <ul>
+        <?php
+        foreach ($kulhe as $attr => $val) {
           // stampa in caso di dato con array, bigono di altro foreach per stampare tutti gli elementi
           if(gettype($val) === 'array') { // si potrebbe anche fare se attr === Cast ... ma se aggiungiamo altri array potrebbe tornare piu utile cosi
             echo '<li><h3 class="bold-item">'. $attr .'</h3><li>';
