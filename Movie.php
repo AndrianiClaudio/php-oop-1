@@ -137,17 +137,17 @@ $kulhe->setCast($kulhe__setterData['Cast']);
         foreach ($fightClub as $attr => $val) {
           // stampa in caso di dato con array, bigono di altro foreach per stampare tutti gli elementi
           if(gettype($val) === 'array') { // si potrebbe anche fare se attr === Cast ... ma se aggiungiamo altri array potrebbe tornare piu utile cosi
-            echo '<li><h3 class="bold-item">'. $attr .'</h3><li>';
+            echo '<li><h3 class="bold-item">'. str_replace('_',' ',$attr) .'</h3><li>';
             echo '<ul>';
             foreach ($val as $key => $item) {
               echo '<li><h4 class="inline-h">'.str_replace('-',' ',$key).'</h4>' . $item . '</li>';
             }
             echo '</ul>';
           } else if($val === null) {
-            echo '<li>'.$attr .': Valore non presente.</li>';
+            echo '<li>'.str_replace('_',' ',$attr) .': Valore non presente.</li>';
           }
           else { // caso in cui dato sia stringa o comunque un valore visibile senza altre complicazioni
-            echo '<li><h3>'. $attr .'</h3>'. $val. '</li>';
+            echo '<li><h3>'. str_replace('_',' ',$attr) .'</h3>'. $val. '</li>';
           }
         }
         ?>
@@ -161,17 +161,17 @@ $kulhe->setCast($kulhe__setterData['Cast']);
         foreach ($kulhe as $attr => $val) {
           // stampa in caso di dato con array, bigono di altro foreach per stampare tutti gli elementi
           if(gettype($val) === 'array') { // si potrebbe anche fare se attr === Cast ... ma se aggiungiamo altri array potrebbe tornare piu utile cosi
-            echo '<li><h3 class="bold-item">'. $attr .'</h3><li>';
+            echo '<li><h3 class="bold-item">'. str_replace('_',' ',$attr) .'</h3><li>';
             echo '<ul>';
             foreach ($val as $key => $item) {
               echo '<li><h4 class="inline-h">'.str_replace('-',' ',$key).'</h4>' . $item . '</li>';
             }
             echo '</ul>';
           } else if($val === null) {
-            echo '<li>'.$attr .'mancante </li>';
+            echo '<li>'.str_replace('_',' ',$attr) .'mancante </li>';
           }
           else { // caso in cui dato sia stringa o comunque un valore visibile
-            echo '<li><h3>'. $attr. '</h3>'. $val. '</li>';
+            echo '<li><h3>'. str_replace('_',' ',$attr). '</h3>'. $val. '</li>';
           }
         }
         ?>
